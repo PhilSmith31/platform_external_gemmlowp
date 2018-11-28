@@ -34,9 +34,8 @@ template <typename tScalar, VectorShape tShape>
 class ConstIterator<VectorMap<tScalar, tShape>> {
  public:
   typedef tScalar Scalar;
-  ConstIterator(const VectorMap<tScalar, tShape>& vector_map,
-                const int start_offset)
-      : pointer_(vector_map.data() + start_offset) {}
+  ConstIterator(const VectorMap<tScalar, tShape>& vector_map)
+      : pointer_(vector_map.data()) {}
   const Scalar operator*() const { return *pointer_; }
   const Scalar* get() const { return pointer_; }
   ConstIterator& operator+=(int inc) { pointer_ += inc; return *this; }
@@ -46,9 +45,8 @@ class ConstIterator<VectorMap<tScalar, tShape>> {
 
 template <typename tScalar, VectorShape tShape>
 ConstIterator<VectorMap<tScalar, tShape>> const_iterator(
-    const VectorMap<tScalar, tShape>& vector_map,
-    const int start_offset) {
-  return ConstIterator<VectorMap<tScalar, tShape>>(vector_map, start_offset);
+    const VectorMap<tScalar, tShape>& vector_map) {
+  return ConstIterator<VectorMap<tScalar, tShape>>(vector_map);
 }
 
 template <typename tScalar, VectorShape tShape> class VectorDup;
@@ -68,8 +66,7 @@ class ConstIterator<VectorDup<tScalar, tShape>> {
 
 template <typename tScalar, VectorShape tShape>
 ConstIterator<VectorDup<tScalar, tShape>> const_iterator(
-    const VectorDup<tScalar, tShape>& vector_map,
-    const int start_offset) {
+    const VectorDup<tScalar, tShape>& vector_map) {
   return ConstIterator<VectorDup<tScalar, tShape>>(vector_map);
 }
 
